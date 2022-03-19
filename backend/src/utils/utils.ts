@@ -1,7 +1,5 @@
 import dotenv from 'dotenv';
 
-import { onLog } from 'src/utils/log-handler';
-
 const isValid = !process.env.NODE_ENV || process.env.NODE_ENV !== 'production';
 
 export const execDotEnv = () =>
