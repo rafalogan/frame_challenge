@@ -1,13 +1,22 @@
 import express, { Application } from 'express';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
-import { onLog } from 'src/utils';
+
+import ServicesModule from 'src/services/services.module';
+import CalcModule from 'src/modules/calc/calc.module';
+import { AppConfigOptions } from 'src/core';
 
 export class AppConfig {
 	private _express: Application;
+	private servicesModule: ServicesModule;
+	private environment: string;
 
-	constructor(private enviroment: string) {
+	constructor(options: AppConfigOptions) {
 		this._express = express();
+		this.servicesModule = options.servicesModule;
+		this.environment = options.environment;
+
+		this.exec();
 	}
 
 	get express(): Application {
@@ -20,12 +29,13 @@ export class AppConfig {
 	}
 
 	private configExpress() {
-		this.express.use(morgan(this.enviroment !== 'production' ? 'dev' : 'combined'));
+		this.express.use(morgan(this.environment !== 'production' ? 'dev' : 'combined'));
 		this.express.use(bodyParser.urlencoded({ extended: false }));
 		this.express.use(bodyParser.json());
 	}
 
 	private initModules() {
-		onLog('insert Modules:');
+		const { calcService } = this.servicesModule;
+		new CalcModule(this.express, calcService).exec();
 	}
 }

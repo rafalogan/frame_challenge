@@ -4,14 +4,15 @@
   "description": "",
   "main": "server.ts",
   "scripts": {
-    "start": "node ./dist/server.js",
+    "start": "pm2-runtime start ecosystem.config.yml",
     "lint": "npx eslint . --ext .ts",
     "lint:fix": "npx eslint . --ext .ts --fix",
     "style": "prettier --check 'src/**/*.ts' 'test/**/*ts'",
     "style:fix": "prettier --write 'src/**/*.ts' 'test/**/*ts'",
-    "dev": "nodemon ./src/server.ts",
+    "dev": "nodemon server.ts",
     "build": "rm -rf ./dist && tsc",
     "test": "NODE_ENV=test npx jest --no-cahce --runInBand --watchAll --config ./jest.config.ts",
+		"test:func": "NODE_ENV=test npx jest --no-cahce --runInBand --config ./test/jest.config.ts",
     "test:cov": "NODE_ENV=test npx jest --no-cahce --config ./jest.config.ts --coverage"
   },
   "keywords": [],
@@ -50,5 +51,11 @@
     "ts-node": "^10.7.0",
     "tsconfig-paths": "^3.14.0",
     "typescript": "^4.6.2"
-  }
+  },
+	"_moduleAliases": {
+		"@root"      : ".",
+		"@deep"      : "src/some/very/deep/directory/or/file",
+		"@my_module" : "lib/some-file.js",
+		"something"  : "src/foo"
+	}
 }
