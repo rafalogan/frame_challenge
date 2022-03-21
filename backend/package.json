@@ -12,7 +12,7 @@
     "dev": "nodemon server.ts",
     "build": "rm -rf ./dist && tsc",
     "test": "NODE_ENV=test npx jest --no-cahce --runInBand --watchAll --config ./jest.config.ts",
-    "test:func": "NODE_ENV=test npx jest --no-cahce --runInBand --config ./test/jest.config.ts",
+    "test:func": "NODE_ENV=test npx jest --no-cahce --runInBand --config ./jest.config.ts",
     "test:cov": "NODE_ENV=test npx jest --no-cahce --config ./jest.config.ts --coverage"
   },
   "keywords": [],
