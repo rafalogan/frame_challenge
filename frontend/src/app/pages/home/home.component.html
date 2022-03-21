@@ -1,0 +1,33 @@
+ <mat-card class="home  mat-elevation-z3">
+    <mat-card-title class="title">Seja Bem vindo</mat-card-title>
+    <mat-card-subtitle class="subtitle">
+      Essa aplicação é capaz de decompor um número em todos os seus divisores, enumerando também aqueles que são primos.
+    </mat-card-subtitle>
+    <mat-card-content>
+      <p> App disponivel como api no EndPoint: {{endPoint}}/:numero</p>
+
+      <form action="">
+        <mat-form-field>
+          <label>
+            <input type="text" matInput placeholder="Numero"
+                   [(ngModel)]="number" name="number">
+          </label>
+        </mat-form-field>
+        <button mat-raised-button (click)="calcNumber()" color="primary">
+          <i class="material-icons">calculate</i> calcular
+        </button>
+      </form>
+    </mat-card-content>
+
+   <mat-card-content *ngIf="result">
+     <p>Número de Entrada: {{ result.input }}</p>
+     <p>Números divisores: {{ result.vewDivaiders }}</p>
+     <p>Divisores Primos:  {{ result.vewPrimeDivisors }}</p>
+   </mat-card-content>
+
+   <mat-card-content *ngIf="aviso">
+     <p> Insira um número para fazer o cálculo</p>
+   </mat-card-content>
+ </mat-card>
+
+
