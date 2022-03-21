@@ -1,6 +1,7 @@
 import express, { Application } from 'express';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
+import cors from 'cors';
 
 import ServicesModule from 'src/services/services.module';
 import CalcModule from 'src/modules/calc/calc.module';
@@ -29,6 +30,7 @@ export class AppConfig {
 	}
 
 	private configExpress() {
+		this.express.use(cors());
 		this.express.use(morgan(this.environment !== 'production' ? 'dev' : 'combined'));
 		this.express.use(bodyParser.urlencoded({ extended: false }));
 		this.express.use(bodyParser.json());
